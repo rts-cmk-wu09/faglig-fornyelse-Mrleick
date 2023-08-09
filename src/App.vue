@@ -1,13 +1,27 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div id="app">
+    <FrontPage />
+  </div>
 </template>
 
 <script>
+import FrontPage from '@/components/Frontpage.vue';
+
 export default {
-  name: "App",
+  name: 'App',
+  components: {
+    FrontPage,
+  },
 };
 </script>
 
 <style>
-
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>
