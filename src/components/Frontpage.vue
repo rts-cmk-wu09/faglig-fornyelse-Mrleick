@@ -1,25 +1,48 @@
-<!-- mit template tag er en del af Vue.js og bruges til at definere komponentens visuelle struktur i HTML, hvilket 
-gør det nemmere at organisere min html kode.-->
 <template>
   <div class="front-page">
-    <h2>Register</h2>
     <form @submit.prevent="register">
-      <label for="email">Email:</label><br />
-      <input type="email" id="email" v-model="email" required /><br /><br />
+      <ul class="tab-group">
+        <li class="tab"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+      <h2>Sign Up</h2>
 
-      <label for="password">Password:</label><br />
-      <input
-        type="password"
-        id="password"
-        v-model="password"
-        required
-      /><br /><br />
-
+      <div class="name">
+        <input
+          placeholder="First name"
+          type="text"
+          id="firstName"
+          v-model="firstName"
+          required
+        />
+        <input
+          placeholder="Last name"
+          type="text"
+          id="lastName"
+          v-model="lastName"
+          required
+        /><br /><br />
+      </div>
+      <div class="info">
+        <input
+          placeholder="Email"
+          type="email"
+          id="email"
+          v-model="email"
+          required
+        /><br />
+        <input
+          placeholder="Password"
+          type="password"
+          id="password"
+          v-model="password"
+          required
+        /><br /><br />
+      </div>
       <button type="submit">Register</button>
     </form>
   </div>
 </template>
-<!--HTML END-->
 
 <script>
 import { ref } from "vue";
@@ -30,6 +53,8 @@ export default {
   setup() {
     const email = ref("");
     const password = ref("");
+    const firstName = ref("");
+    const lastName = ref("");
 
     const register = async () => {
       try {
@@ -37,10 +62,15 @@ export default {
           email.value,
           password.value
         );
-        console.log("User registered:", userCredential.user);
-        alert("Registration successful!");
+        const user = userCredential.user;
 
-        // You can redirect the user or perform other actions here
+        // Update user's display name with first name and last name
+        await user.updateProfile({
+          displayName: `${firstName.value} ${lastName.value}`,
+        });
+
+        console.log("User registered:", user);
+        alert("Registration successful!");
       } catch (error) {
         console.error("Registration error:", error);
         alert("Registration failed. Please check your inputs and try again.");
@@ -50,17 +80,63 @@ export default {
     return {
       email,
       password,
+      firstName,
+      lastName,
       register,
     };
   },
 };
 </script>
 
-
-<!--Når jeg anvender scoped efter min style i Vue, styler den kun på mit pågældne komponent-->
 <style scoped>
 .front-page {
-  text-align: center;
-  padding: 50px;
+  color: white;
+  background: rgba(19, 35, 47, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.tab-group {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  justify-content: center;
+}
+
+.tab {
+  text-decoration: none;
+  background-color: #1ab188;
+}
+
+li a {
+  text-decoration: none;
+  color: white;
+  padding: 15px;
+  display: block;
+  width: 250px;
+}
+
+button {
+  color: white;
+  width: 250px;
+  padding: 15px;
+  background-color: #1ab188;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.name {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: auto;
+  margin-bottom: 20px;
 }
 </style>
