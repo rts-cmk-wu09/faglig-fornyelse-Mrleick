@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <regForm />
+    <Regform />
   </div>
 </template>
 
 <script>
-import regForm from '@/components/Regform.vue';
+import Regform from "./components/Regform.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    regForm,
+    Regform,
   },
 };
 </script>
 
 <style>
-body{
+body {
   background: #c1bdba;
 }
 
