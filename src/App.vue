@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <FrontPage />
+    <regForm />
   </div>
 </template>
 
 <script>
-import FrontPage from '@/components/Frontpage.vue';
+import regForm from '@/components/Regform.vue';
 
 export default {
   name: 'App',
   components: {
-    FrontPage,
+    regForm,
   },
 };
 </script>
