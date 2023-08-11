@@ -1,6 +1,9 @@
 <!--Mit template er den del af min vue kode som indeholder min HTML del.-->
 <template>
   <div class="front-page">
+    <div>
+      <img class="logo float" src="../assets/logo.png" />
+    </div>
     <!--Dette er min HTML formular med en Vue eventlytter som lytter efter når jeg klikker på min sumbit knap eller trykker enter.-->
     <form @submit.prevent="handleFormSubmit">
       <ul class="tab-group">
@@ -15,7 +18,7 @@
           <a href="#login">Log In</a>
         </li>
       </ul>
-      <h2 v-if="!showLoginForm">Sign Up</h2>
+      <h2 v-if="!showLoginForm">Sign up</h2>
 
       <div class="register" v-if="!showLoginForm">
         <input
@@ -83,7 +86,7 @@ export default {
             loginEmail.value,
             loginPassword.value
           );
-          console.log("User logged in successfully");
+          console.log("Login is successful");
           alert("Login successful!");
         } catch (error) {
           console.error("Login error:", error);
@@ -125,6 +128,14 @@ export default {
 
 <!--Min styling som pt. er lavet i CSS3 skal laves om til tailwind-->
 <style scoped>
+.slide-enter-active, .slide-leave-active {
+  transition: transform 0.5s ease;
+}
+.slide-enter, .slide-leave-to /* .slide-leave-active in <2.1.8 */ {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
 .front-page {
   color: white;
   background: rgba(19, 35, 47, 0.9);
@@ -133,6 +144,28 @@ export default {
   margin: 40px auto;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 50px;
+}
+
+.float {
+  animation: floating 3s ease-in-out infinite; /* Use the "floating" animation */
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0); /* Start at the original position */
+  }
+  50% {
+    transform: translateY(-15px); /* Move up */
+  }
+  100% {
+    transform: translateY(0); /* Return to the original position */
+  }
 }
 
 .tab-group {
@@ -149,12 +182,13 @@ export default {
 }
 
 .active {
-  background-color: #1ab188;
+  background-color: #6ac259;
 }
 
 .active:hover {
   transition: 0.5s ease;
-  background-color: rgba(26, 177, 136, 0.8);
+  background-color: #6ac259;
+  opacity: 0.8;
 }
 
 li a {
@@ -179,14 +213,14 @@ input {
 input:focus {
   outline: none;
   transition: 0.5s ease;
-  border: 1px solid rgba(26, 177, 136, 0.8);
+  border: 1px solid #6ac259;
 }
 
 button {
   color: white;
   width: 250px;
   padding: 15px;
-  background-color: #1ab188;
+  background-color: #6ac259;
   outline: none;
   border: 0;
   cursor: pointer;
@@ -194,6 +228,7 @@ button {
 
 button:hover {
   transition: 0.5s ease;
-  background-color: rgba(26, 177, 136, 0.8);
+  background-color: #6ac259;
+  opacity: 0.8;
 }
 </style>
