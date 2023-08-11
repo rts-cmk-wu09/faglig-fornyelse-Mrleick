@@ -1,5 +1,7 @@
+<!--Mit template er den del af min vue kode som indeholder min HTML del.-->
 <template>
   <div class="front-page">
+    <!--Dette er min HTML formular med en Vue eventlytter som lytter efter når jeg klikker på min sumbit knap eller trykker enter.-->
     <form @submit.prevent="handleFormSubmit">
       <ul class="tab-group">
         <li class="tab" :class="{ active: !showLoginForm }">
@@ -121,8 +123,7 @@ export default {
 };
 </script>
 
-
-
+<!--Min styling som pt. er lavet i CSS3 skal laves om til tailwind-->
 <style scoped>
 .front-page {
   color: white;
